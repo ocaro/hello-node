@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title #{title}
+    link(rel='stylesheet', href='/css/style.css')
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+  body
+    main
+      block header
+        header.header
+      block content
+        div.container
+            p Site Version: #{siteVersion}
+            p Site Name: #{siteName}
+            hr
+            br
+            p This site has been hit #{globalHitCount} times
+            br
+            p This container name: #{thisServerName}
+            p This specific server has been hit #{localHitcount} times
+            br
+            hr
+            p This website is just an example app for demonstrating how cloud deployments could work
