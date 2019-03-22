@@ -1,0 +1,41 @@
+
+version: '3.7'
+services:
+  load-balancer:
+    image: traefik:1.7-alpine
+    restart: always
+    command:
+      - "--api"
+      - "--docker"
+      - "--ping"
+    networks:
+      - default
+    ports:
+      - "8000:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  node-app:
+    image: localhost:5000/node-app:latest
+    build: ./node-app
+    links:
+      - redis
+    labels:
+      - "traefik.backend=node-app"
+      - "traefik.port=3000"
+      - "traefik.frontend.rule=Host:localhost"
+    environment:
+      - NODE_ENV=development
+      - REDIS_HOSTNAME=redis
+      - REDIS_PORT=6379
+      - SITE_VERSION=v1.0
+      - SITE_NAME=Cloud Team Example App
+    command: npm start
+
+  redis:
+    image: "redis:alpine"
+    labels:
+      - "traefik.enable=false"
+
+networks:
+  default:
