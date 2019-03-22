@@ -10,8 +10,10 @@ Download the repo and then run the following two commands
 from the same base directory next to the docker-compose.yml
 Make sure you don't have anything running on port 8000 already locally
 
+```
 docker-compose build
 docker-compose up -d --scale node-app=6
+```
 
 Browse to the website at "http://localhost:8000"
 
@@ -20,11 +22,15 @@ If you don't have NPM install that first
 Download the repo and then cd into node_app directory
 Download the packages with:
 
+```
 npm install
+```
 
 then run the app with
 
+```
 node server.js
+```
 
 Browse to the website at "http://localhost:3000"
 
@@ -38,11 +44,13 @@ Need to deploy to k8s an redis server accessable to other workloads (google has 
 Need to expose this as a service internally for other apps in the cluster to use. You'll need to set this service name and port below passed in to the node containers for redis access. 
 
 Need to deploy to k8s XXXX number of node-app images running and make sure to pass in the following running environment variables:
+```
 - NODE_ENV=development
 - REDIS_HOSTNAME=redis
 - REDIS_PORT=6379
 - SITE_VERSION=v1.0
 - SITE_NAME=Cloud Team Example App
+```
 
 Create service via the gui that creates an external load-balancer pointed to the node-app running pods for users to hit. 
 
