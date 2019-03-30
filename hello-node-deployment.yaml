@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: hello-node-deployment
+  name: hello-node
   labels:
     app: hello-node
 spec:
@@ -18,4 +18,3 @@ spec:
           image: localhost:5000/k8s-user/hello-node
       imagePullSecrets:
         - name: regcred
-  replicas: 3
