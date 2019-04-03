@@ -16,7 +16,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
   node-app:
-    image: localhost:5000/node-app:latest
     build: ./node-app
     links:
       - redis
