@@ -3,7 +3,7 @@ steps:
 - name: 'docker/compose:1.23.2'
   args: ['up', '-d']
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['tag', 'workspace_hello-node:latest', 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
+  args: ['tag', 'workspace_node-app:latest', 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
 - name: 'gcr.io/cloud-builders/docker'
   args: ['push', 'gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA']
 - name: 'gcr.io/cloud-builders/kubectl'
