@@ -17,24 +17,33 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
   node-app:
     build: ./node-app
-    links:
-      - redis
     labels:
       - "traefik.backend=node-app"
       - "traefik.port=3000"
       - "traefik.frontend.rule=Host:localhost"
     environment:
       - NODE_ENV=development
-      - REDIS_HOSTNAME=redis
-      - REDIS_PORT=6379
+      - SENT=sentinel
+      - SENTPORT=26379
       - SITE_VERSION=v1.0
       - SITE_NAME=Cloud Team Example App
     command: npm start
 
-  redis:
-    image: "redis:alpine"
-    labels:
-      - "traefik.enable=false"
+  master:
+    image: redis:3
+  slave:
+    image: redis:3
+    command: redis-server --slaveof redis-master 6379
+    links:
+      - master:redis-master
+  sentinel:
+    build: sentinel
+    environment:
+      - SENTINEL_DOWN_AFTER=5000
+      - SENTINEL_FAILOVER=5000
+    links:
+      - master:redis-master
+      - slave
 
 networks:
   default:
