@@ -7,13 +7,13 @@
 ## Run the app in GCP
 
 Deploy the image.
-`docker tag hello-node:latest gcr.io/project/hello-node:latest`
-`docker push gcr.io/project/hello-node:latest`
+`docker tag hello-node:latest gcr.io/$PROJECT/hello-node:latest`
+`docker push gcr.io/$PROJECT/hello-node:latest`
 
 ## Run the app
 
 Deploy the app using a one pod replica.
-`kubectl create deployment hello-node --image=gcr.io/project/hello-node`
+`kubectl create deployment hello-node --image=gcr.io/$PROJECT/hello-node`
 
 Undeploy the app.
 `kubectl delete deployment/hello-node`
@@ -38,12 +38,12 @@ Cause autoscaling from your computer.
 `while true; do curl http://localhost:8080; done > /dev/null 2>&1`
 
 Cause a redeploy of pods
-1. Tag latest as v1 `docker tag hello-node=gcr.io/project/hello-node:latest hello-node=gcr.io/project/hello-node:v1`
-1. Push v1 to the registry `docker push gcr.io/project/hello-node:v1`
+1. Tag latest as v1 `docker tag hello-node=gcr.io/$PROJECT/hello-node:latest hello-node=gcr.io/$PROJECT/hello-node:v1`
+1. Push v1 to the registry `docker push gcr.io/$PROJECT/hello-node:v1`
 1. Make changes to `server.js` and add some text after `Hello World!`.
-1. Build a new image `docker build --tag gcr.io/project/hello-node:v2 .`
-1. Push v2 to the registry `docker push gcr.io/project/hello-node:v2`
-1. Tag v2 as the latest `docker tag hello-node=gcr.io/project/hello-node:v2 hello-node=gcr.io/project/hello-node:latest`
+1. Build a new image `docker build --tag gcr.io/$PROJECT/hello-node:v2 .`
+1. Push v2 to the registry `docker push gcr.io/$PROJECT/hello-node:v2`
+1. Tag v2 as the latest `docker tag hello-node=gcr.io/$PROJECT/hello-node:v2 hello-node=gcr.io/$PROJECT/hello-node:latest`
 1. Switch to the v2 image `kubectl set image deployments/hello-node hello-node=gcr.io/icg-cloudteam-temp/hello-node:v2`
 1. Verify the rollout `kubectl rollout status deployments/hello-node`
 1. View the events `kubectl describe pods --selector='app=hello-node'`
