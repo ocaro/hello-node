@@ -44,7 +44,7 @@ Cause a redeploy of pods
 1. Build a new image `docker build --tag gcr.io/$PROJECT/hello-node:v2 .`
 1. Push v2 to the registry `docker push gcr.io/$PROJECT/hello-node:v2`
 1. Tag v2 as the latest `docker tag hello-node=gcr.io/$PROJECT/hello-node:v2 hello-node=gcr.io/$PROJECT/hello-node:latest`
-1. Switch to the v2 image `kubectl set image deployments/hello-node hello-node=gcr.io/icg-cloudteam-temp/hello-node:v2`
+1. Switch to the v2 image `kubectl set image deployments/hello-node hello-node=gcr.io/$PROJECT/hello-node:v2` or `kubectl rolling-update hello-node --image=gcr.io/$PROJECT/hello-node:v2`
 1. Verify the rollout `kubectl rollout status deployments/hello-node`
 1. View the events `kubectl describe pods --selector='app=hello-node'`
 
