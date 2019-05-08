@@ -4,3 +4,6 @@ addons:
     organization: "chronominds-github"
     token:
       secure: "a0b1164bfaf91a1d584d21085c0310d8750570df"
+script:
+  # other script steps might be done before running the actual analysis
+  - sonar-scanner
