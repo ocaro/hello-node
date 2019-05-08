@@ -1,1 +1,6 @@
 language: node_js
+addons:
+  sonarcloud:
+    organization: "chronominds-github"
+    token:
+      secure: "a0b1164bfaf91a1d584d21085c0310d8750570df"
