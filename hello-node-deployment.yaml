@@ -16,5 +16,12 @@ spec:
       containers:
         - name: hello-node
           image: localhost:5000/k8s-user/hello-node
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
       imagePullSecrets:
         - name: regcred
