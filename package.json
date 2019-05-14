@@ -4,7 +4,8 @@
   "description": "A Simple Hello World.",
   "main": "server.js",
   "scripts": {
-    "test": ""
+    "test": "",
+    "build": ""
   },
   "repository": {
     "type": "git",
