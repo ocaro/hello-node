@@ -12,6 +12,7 @@
   "dependencies": {
     "express": "^4.16.4",
     "ioredis": "^4.9.0",
-    "pug": "^2.0.3"
+    "pug": "^2.0.3",
+    "lodash": ">=4.17.12"
   }
 }
